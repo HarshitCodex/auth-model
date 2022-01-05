@@ -26,8 +26,10 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - uses: abelfodil/protoc-action@v1
-        with:
-          protoc-version: '3.13.0'
-      - run: protoc --plugin=protoc-gen-grpc-java --grpc-java_out="output/" --proto_path=. *.proto
+      - name: Install protoc
+        run: sudo apt install -y protobuf-compiler
+        
+      - name: Download java-grpc plugin for protoc
+        run: wget https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-java/1.39.0/protoc-gen-grpc-java-1.39.0-linux-x86_64.exe
+        
       
